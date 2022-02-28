@@ -1,5 +1,6 @@
 package io.github.PrenitaVulpo.clientes.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class Client {
     private String cpf;
 
     @Column(name = "registration_date")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate registrationDate;
 
     @PrePersist
