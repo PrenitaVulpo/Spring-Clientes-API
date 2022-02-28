@@ -25,7 +25,7 @@ public class Client {
     @Column(nullable = false, length = 11)
     private String cpf;
 
-    @Column(name = "registration_date")
+    @Column(name = "registration_date", updatable = false)
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate registrationDate;
 
