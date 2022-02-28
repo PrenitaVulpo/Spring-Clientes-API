@@ -1,12 +1,18 @@
 package io.github.PrenitaVulpo.clientes.model.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +26,9 @@ public class Client {
 
     @Column(name = "registration_date")
     private LocalDate registrationDate;
+
+    @PrePersist
+    public void prePersist(){
+        setRegistrationDate(LocalDate.now());
+    }
 }
