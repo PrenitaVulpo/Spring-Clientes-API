@@ -30,4 +30,31 @@ public class ClientController {
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Class<Void> deleteClientByID(@PathVariable("id") Integer id){
+        //repository.deleteById()
+        return repository
+                .findById(id)
+                .map(client -> {
+                    repository.delete(client);
+                    return Void.TYPE;
+                })
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Client updateClient(
+            @PathVariable Integer id,
+            @RequestBody Client updatedClientData){
+        return repository
+                .findById(id)
+                .map(client -> {
+                    updatedClientData.setId(client.getId());
+                    return repository.save(updatedClientData);
+                })
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
 }
